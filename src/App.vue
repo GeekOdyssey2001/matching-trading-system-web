@@ -1,12 +1,12 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
   <router-view/>
 </template>
 
 <style lang="scss">
+  @import "./assets/css/main.css";
+  @import "./assets/css/color-dark.css";
+
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -15,6 +15,11 @@
   color: #2c3e50;
 }
 
+
+// CSS 注释：1.单行// 2.多行 /*这是多行注释*/
+
+//Vue自带样式去掉
+/*
 nav {
   padding: 30px;
 
@@ -27,4 +32,5 @@ nav {
     }
   }
 }
+*/
 </style>

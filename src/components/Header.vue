@@ -20,9 +20,11 @@
                 </span>
 
                 <!--下拉菜单内容-->
-                <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item command="">退出登录</el-dropdown-item>
-                </el-dropdown-menu>>
+                <template #dropdown>
+                    <el-dropdown-menu>
+                        <el-dropdown-item command="">退出登录</el-dropdown-item>
+                    </el-dropdown-menu>
+                </template>
             </el-dropdown>
         </div>
     </div>
@@ -105,6 +107,9 @@
     }
 
     .el-dropdown-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
         color: #fff;
         cursor: pointer;
     }

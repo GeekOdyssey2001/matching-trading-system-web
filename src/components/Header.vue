@@ -2,8 +2,8 @@
   <div class="header">
     <!--折叠按钮-->
     <div class ="collapse-btn" @click="collapseChange">
-        <i v-if="!collapse" class="el-icon-s-fold"></i>
-        <i v-else class="el-icon-s-unfold"></i>
+        <el-icon v-if="!collapse"><Fold /></el-icon>
+        <el-icon v-else><Expand /></el-icon>
     </div>
 
     <!--LOGO-->
@@ -16,7 +16,7 @@
                 <span class = "el-dropdown-link">
                     {{username}}
                     <!--小箭头-->
-                    <i class="el-icon-caret-bottom"/> 
+                    <el-icon><CaretBottom /></el-icon>
                 </span>
 
                 <!--下拉菜单内容-->
@@ -31,8 +31,11 @@
 
 
 <script>
+    import { Fold, Expand, CaretBottom } from '@element-plus/icons-vue'
+
     export default{
         name: "Header",
+        components: { Fold, Expand, CaretBottom },
         //定义变量
         data(){
             return{

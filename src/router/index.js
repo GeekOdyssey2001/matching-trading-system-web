@@ -1,5 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Login from '../views/Login.vue'
+import Home from '../views/Home.vue'
+
+
 
 const routes = [
   {
@@ -7,6 +10,29 @@ const routes = [
     name: 'Login',
     component: () => import('../views/Login.vue')
   },
+  {
+    path: '/',
+    name: 'Home',
+    component: () => import('../views/Home.vue'),
+    //嵌套子路由
+    children:[
+      {
+        path: '/dashboard',
+        name: 'Dashboard',
+        component: () => import('../views/Dashboard.vue')
+      },
+    ]
+  },
+  {
+    path: '/404',
+    name: '404',
+    component: () => import('../views/404.vue')
+  },
+  //兜底路由
+  // {
+  //   path:'*',
+  //   redirect:'/404',
+  // },
   {
     path: '/about',
     name: 'about',

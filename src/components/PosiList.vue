@@ -46,6 +46,7 @@
     export default {
         name: 'PosiList',
         data(){
+            return {
             tableData:[
                 {code:'600025',name:'华能水电',count:100,cost:20},
                 {code:'600000',name:'浦发银行',count:100,cost:20},
@@ -58,6 +59,7 @@
                 currentPage:1,//当前页码
                 pageSize:2,//每页的记录数
             },
+            };
         },
     }
 

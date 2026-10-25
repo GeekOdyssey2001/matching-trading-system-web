@@ -11,7 +11,8 @@
             :cell-style="cellStyle"
         >
             <!--表格要显示哪些列-->
-            <el-table-column prop="code" label="代码" align="center"/>
+            <el-table-column prop="code" label="代码" align="center" 
+            sortable :sort-orders="['ascending','descending']"/>
             <el-table-column prop="name" label="名称" align="center"/>
             <el-table-column prop="count" label="股票数量" align="center" />
             <el-table-column prop="cost" label="总投入"/>

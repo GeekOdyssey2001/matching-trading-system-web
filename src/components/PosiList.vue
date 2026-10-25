@@ -72,8 +72,8 @@
             };
         },
         methods:{
-            cellStyle({row,column,rowIndex,columnIndex}){
-                return "padding:2px";
+            cellStyle(){
+                return { padding: '2px' };
             },
         }
     }

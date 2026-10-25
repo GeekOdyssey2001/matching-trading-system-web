@@ -11,7 +11,7 @@
 
         <el-card shadow="hover" class="container">
             <el-row style="padding: 0 15%;">
-                <el-form label-width="80px">
+                <el-form label-width="80px" class="transfer-form">
                     <!--转账方式-->
                     <el-form-item label="转账方式"> 
                         <el-select v-model="type" style="width:100%"> <!--下拉列表-->
@@ -32,7 +32,7 @@
                     </el-form-item>
                     <!--银行密码-->
                     <el-form-item label="银行密码">
-                        <el-input :type="'password'" v-model="form.password"/> <!--单引号表示是一个变量，而不是一个字符串-->
+                        <el-input type="password" v-model="form.password"/>
                     </el-form-item>
                     <!--选择币种-->
                     <el-form-item label="选择币种"> 
@@ -48,8 +48,8 @@
                         <el-input  v-model="form.money"/> 
                     </el-form-item>
                     <!--确定按钮-->
-                    <el-form-item>
-                        <el-button  size="samll", type="primary" style="float:right;"> 转账</el-button>
+                    <el-form-item class="transfer-form-actions">
+                        <el-button size="small" type="primary"> 转账</el-button>
                     </el-form-item>
 
                 </el-form>
@@ -77,6 +77,7 @@
                         {id:0,name:'建设银行'},
                     ],
                     password:'',
+                    money:0,
                     moneyType:[
                         {id:1,name:'美元'},
                         {id:0,name:'人民币'},
@@ -84,13 +85,18 @@
                 },
                 type:0,
                 bank:'招商银行',
-                moneyType:'人民币',
-                money:0,
+                moneyType:0,
             }
         },
     }
 </script>
 
 <style scoped>
+.transfer-form {
+    width: 100%;
+}
 
+.transfer-form-actions :deep(.el-form-item__content) {
+    justify-content: flex-end;
+}
 </style>

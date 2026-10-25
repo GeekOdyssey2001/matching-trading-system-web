@@ -12,7 +12,11 @@
         <!-- 主页面业务 -->
         <div class="content-box" :class="{'content-collapse':collapse}">
             <div class="content">
-                <router-view> </router-view>
+                <router-view v-slot="{ Component }">
+                    <transition name="move" mode="out-in">
+                        <component :is="Component" />
+                    </transition>
+                </router-view>
              </div>
         </div>
 

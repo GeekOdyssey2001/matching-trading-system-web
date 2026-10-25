@@ -6,7 +6,7 @@
         </el-row>
         <!--持仓列表 表格-->
         <el-table
-            :data="tableData"
+            :data="pagedTableData"
             border
         >
             <!--表格要显示哪些列-->
@@ -29,7 +29,7 @@
             <!--ele自带的分页控件-->
             <el-pagination
                 layout="total,prev,pager,next"
-                :current-page="query.currentPage"
+                v-model:current-page="query.currentPage"
                 :page-size="query.pageSize"
                 :total="dataTotalCount"
             />
@@ -45,6 +45,12 @@
 
     export default {
         name: 'PosiList',
+        computed: {
+            pagedTableData() {
+                const start = (this.query.currentPage - 1) * this.query.pageSize;
+                return this.tableData.slice(start, start + this.query.pageSize);
+            },
+        },
         data(){
             return {
             tableData:[

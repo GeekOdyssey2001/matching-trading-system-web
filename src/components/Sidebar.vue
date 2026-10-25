@@ -52,9 +52,11 @@
     export default{
         name:"Sidebar",
         components: { PieChart, List, Sell, Search, CreditCard, Setting },
+        props: {
+            collapse: { type: Boolean, default: false },
+        },
         data(){
             return{
-                collapse:false,
                 items: [
                     {
                         icon:'PieChart',
@@ -137,7 +139,7 @@
         overflow-y: scroll;
 
 
-        .el-menu-item {
+        .sidebar-menu:not(.el-menu--collapse) .el-menu-item {
             min-width: 150px;
         }
 
@@ -154,7 +156,7 @@
         }
 
         .el-menu--collapse{
-            width: auto ! important;
+            width: 65px;
         }
     }
 
@@ -162,7 +164,7 @@
         width: 0;
     }
 
-    .sidebar-el-menu:not(.el-menu--collapse) {
+    .sidebar-menu:not(.el-menu--collapse) {
         width: 150px;
     }
 

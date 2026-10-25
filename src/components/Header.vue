@@ -38,16 +38,19 @@
     export default{
         name: "Header",
         components: { Fold, Expand, CaretBottom },
+        props: {
+            collapse: { type: Boolean, default: false },
+        },
+        emits: ['toggle-collapse'],
         //定义变量
         data(){
             return{
                 username:'guest',
-                collapse:true,
             }
         },
         methods:{
             collapseChange(){
-                this.collapse = !this.collapse;
+                this.$emit('toggle-collapse');
             }
         }
     }

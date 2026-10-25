@@ -1,8 +1,8 @@
 <template> <!-- 每个组件的模板只能包含一个根template-->
     <div class="wrapper">
         <!--引入头部导航栏，Vue自带也有header，所以要生命自定义的，这也是命名为vHeader原因-->
-        <v-header/>
-        <v-sidebar/>
+        <v-header :collapse="collapse" @toggle-collapse="collapse = !collapse"/>
+        <v-sidebar :collapse="collapse"/>
 
          <h1>hello, I am home page </h1>
 
@@ -29,6 +29,9 @@
 
     export default{
         name:'Home',
+        data(){
+            return { collapse: false };
+        },
         components:{
             vHeader,
             vSidebar,

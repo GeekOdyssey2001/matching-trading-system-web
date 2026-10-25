@@ -8,6 +8,7 @@
         <el-table
             :data="pagedTableData"
             border
+            :cell-style="cellStyle"
         >
             <!--表格要显示哪些列-->
             <el-table-column prop="code" label="代码" align="center"/>
@@ -70,6 +71,11 @@
             },
             };
         },
+        methods:{
+            cellStyle({row,column,rowIndex,columnIndex}){
+                return "padding:2px";
+            },
+        }
     }
 
 </script>

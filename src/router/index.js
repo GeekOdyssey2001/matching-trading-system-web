@@ -1,6 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Login from '../views/Login.vue'
-import Home from '../views/Home.vue'
 
 
 
@@ -11,8 +9,9 @@ const routes = [
     component: () => import('../views/Login.vue')
   },
   {
-    path: '/',
+    path: '/home',
     name: 'Home',
+    redirect: '/dashboard',
     component: () => import('../views/Home.vue'),
     //嵌套子路由
     children:[

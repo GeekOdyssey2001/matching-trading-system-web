@@ -1,35 +1,37 @@
 <template>
     <!-- <h1>您好~~ 登录</h1> -->
     <!-- 每一个Vue 页面只有一个div跟标签-->
-    <div class=“login-wrap”> 
+    <div class="login-wrap"> 
         <el-form class="login-container">
         <!-- -->
         <h3 class="title">用户登录</h3>
         <!-- -->
-        <el-from-item>
+        <el-form-item>
             <el-input type="text" placeholder="账号"/>
-        </el-from-item>
-        <el-from-item>
+        </el-form-item>
+        <el-form-item>
             <el-input type="password" placeholder="密码"/>
-        </el-from-item>
+        </el-form-item>
     
         <el-row>
             <!--验证码输入框 -->
             <el-col :span="12">
-                <el-from-item>
+                <el-form-item>
                     <el-input type="text" placeholder="验证码"/>
-                </el-from-item>
+                </el-form-item>
             </el-col>
             <!--验证码图片 -->
             <el-col :span="12">
                 <img/>
             </el-col>
             <!--登录按钮 -->
-             <el-from-item>
+            <el-col :span="24">
+             <el-form-item>
                 <el-button type="primary" style="width: 100%">
                 登录
                  </el-button>
-              </el-from-item>
+              </el-form-item>
+            </el-col>
         </el-row>
         </el-form>
     </div>

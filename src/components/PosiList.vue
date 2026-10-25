@@ -10,20 +10,21 @@
             border
         >
             <!--表格要显示哪些列-->
-            <el-table-column prop="code" label="代码"/>
-            <el-table-column prop="name" label="名称"/>
-            <el-table-column prop="count" label="股票数量" />
+            <el-table-column prop="code" label="代码" align="center"/>
+            <el-table-column prop="name" label="名称" align="center"/>
+            <el-table-column prop="count" label="股票数量" align="center" />
             <el-table-column prop="cost" label="总投入"/>
-            <el-table-column label="成本"/>  <!--计算属性，不存在于数据源中，通过计算得到-->
+            <el-table-column label="成本" align="center"/>  <!--计算属性，不存在于数据源中，通过计算得到-->
         </el-table>
 
         <!--分页控件 刷新按钮-->
         <div class="pagination">
-            <el-button round type="primary" size="mini"
+            <el-button round type="primary" size="small"
                 style="margin-top: 2px; float:right"
-                icon="el-icon-refresh"
+                background
                  @click="">
-            刷新
+            <el-icon><Refresh /></el-icon>
+            <span>刷新</span>
             </el-button>
 
             <!--ele自带的分页控件-->
@@ -42,9 +43,11 @@
 
 
 <script>
+    import { Refresh } from '@element-plus/icons-vue'
 
     export default {
         name: 'PosiList',
+        components: { Refresh },
         computed: {
             pagedTableData() {
                 const start = (this.query.currentPage - 1) * this.query.pageSize;

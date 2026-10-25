@@ -1,7 +1,7 @@
 <template>
     <div>
         <!--可用资金-->
-        <el-row>
+        <el-row class="balance-row">
             <el-col :span="5">可用资金:{{balance}}</el-col>
         </el-row>
         <!--持仓列表 表格-->
@@ -82,5 +82,8 @@
 </script>
 
 <style scoped>
+.balance-row {
+    text-align: left;
+}
 
 </style>

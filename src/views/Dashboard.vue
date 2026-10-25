@@ -6,7 +6,7 @@
         <div class="crumbs">
             <el-breadcrumb separator="/">
                 <el-breadcrumb-item>
-                    <i class="el-icon-pie-char"></i>资金股份
+                    <el-icon><PieChart /></el-icon>资金股份
                 </el-breadcrumb-item>
             </el-breadcrumb>
         </div>
@@ -20,10 +20,12 @@
 
 
 <script>
+    import { PieChart } from '@element-plus/icons-vue'
     import PosiList from '../components/PosiList'
     export default {
         name: 'Dashboard',
         components:{
+            PieChart,
             PosiList
         }
     }

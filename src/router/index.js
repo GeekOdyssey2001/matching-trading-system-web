@@ -30,7 +30,7 @@ const routes = [
         path: '/transfer',
         name: 'Transfer',
         component: () => import('../views/Transfer.vue'),
-        meta:{requiredAuth:true} //改元数据作用：路由拦截，当前路由需要验证身份
+        // meta:{requiredAuth:true} //改元数据作用：路由拦截，当前路由需要验证身份
       },
     ]
   },

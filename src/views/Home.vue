@@ -8,6 +8,16 @@
 
         <!-- 子路由 -->
         <!-- <router-view></router-view> -->
+
+        <!-- 主页面业务 -->
+        <div class="content-box">
+            <div class="content">
+                <router-view> </router-view>
+             </div>
+        </div>
+
+
+
     </div>
 </template>
 

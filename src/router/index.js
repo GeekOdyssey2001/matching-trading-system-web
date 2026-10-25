@@ -21,8 +21,14 @@ const routes = [
         name: 'Dashboard',
         component: () => import('../views/Dashboard.vue')
       },
+      {
+        path: '/pwdsetting',
+        name: 'PwdSetting',
+        component: () => import('../views/PwdSetting.vue')
+      },
     ]
   },
+
   {
     path: '/404',
     name: '404',

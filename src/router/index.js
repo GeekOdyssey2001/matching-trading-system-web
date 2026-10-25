@@ -26,6 +26,12 @@ const routes = [
         component: () => import('../views/PwdSetting.vue'),
         meta:{requiredAuth:true} //改元数据作用：路由拦截，当前路由需要验证身份
       },
+      {
+        path: '/transfer',
+        name: 'Transfer',
+        component: () => import('../views/Transfer.vue'),
+        meta:{requiredAuth:true} //改元数据作用：路由拦截，当前路由需要验证身份
+      },
     ]
   },
 

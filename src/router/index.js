@@ -24,7 +24,8 @@ const routes = [
       {
         path: '/pwdsetting',
         name: 'PwdSetting',
-        component: () => import('../views/PwdSetting.vue')
+        component: () => import('../views/PwdSetting.vue'),
+        meta:{requiredAuth:true} //改元数据作用：路由拦截，当前路由需要验证身份
       },
     ]
   },
@@ -53,5 +54,21 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+
+//路由拦截器
+router.beforeEach((to,from,next) =>{
+  if(to.meta.requiredAuth){ //前往的页面是否需要验证
+    if(Boolean(sessionStorage.getItem("uid"))){
+      next();
+    }else{
+      next({
+        path:'/',
+      })
+    }
+  }else{
+    next();
+  }
+});
+
 
 export default router

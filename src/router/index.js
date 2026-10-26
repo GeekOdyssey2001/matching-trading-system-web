@@ -30,7 +30,19 @@ const routes = [
         path: '/transfer',
         name: 'Transfer',
         component: () => import('../views/Transfer.vue'),
-        // meta:{requiredAuth:true} //改元数据作用：路由拦截，当前路由需要验证身份
+        meta:{requiredAuth:false} 
+      },
+      {
+        path: '/orderquery',
+        name: 'OrderQuery',
+        component: () => import('../views/OrderQuery.vue'),
+        meta:{requiredAuth:false} 
+      },
+      {
+        path: '/hisorderquery',
+        name: 'HisOrderQuery',
+        component: () => import('../views/HisOrderQuery.vue'),
+        meta:{requiredAuth:false} 
       },
     ]
   },

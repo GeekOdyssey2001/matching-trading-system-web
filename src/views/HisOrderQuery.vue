@@ -23,11 +23,13 @@
 
 <script>
 
+    import { Search } from '@element-plus/icons-vue'
     import HisOrderList from '../components/HisOrderList.vue'
 
     export default{
-        name:"HisOrderQuery"
+        name:"HisOrderQuery",
         components:{
+            Search,
             HisOrderList
         }
     }
@@ -35,5 +37,11 @@
 </script>
 
 <style scoped>
+.query-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    vertical-align: middle;
+}
 
 </style>

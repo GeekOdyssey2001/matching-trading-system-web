@@ -5,7 +5,7 @@
             <el-row>
                 <!--自动提示框，是非常通用的组件所以需要抽取出来一个通用的组件 -->
                     <el-col :span="4">
-                        <code-input/>
+                        <code-input @codeinput-selected="updateSelectedCode"/>
 
                     </el-col>
                 <!--日期选择器 -->
@@ -14,7 +14,7 @@
                     size="small"
                     type="date"
                     placeholder="选择日期"
-                    value-format="yyyyMMdd"
+                    value-format="YYYYMMDD"
                     v-model="query.startDate"
                     />
                 </div>
@@ -23,7 +23,7 @@
                     size="small"
                     type="date"
                     placeholder="选择日期"
-                    value-format="yyyyMMdd"
+                    value-format="YYYYMMDD"
                     v-model="query.endDate"
                     />
                 </div>
@@ -31,8 +31,11 @@
                 <!--搜索按钮 -->
                 <el-button style="float:left; margin-left: 10px"
                         size="small"
-                        type="primary" icon="el-icon-search"
-                        @click="handleSearch"
+                        type="primary"
+                        @click="handleSearch">
+                    <el-icon><Search /></el-icon>
+                    <span>搜索</span>
+                </el-button>
 
             </el-row>
         </div>
@@ -75,11 +78,13 @@
 
 
 <script>
+    import { Search } from '@element-plus/icons-vue'
     import CodeInput from './CodeInput'
     export default{
         name:"HisOrderList",
         components:{
             CodeInput,
+            Search,
         },
         computed: {
             pagedTableData() {
@@ -102,7 +107,7 @@
                     {
                         date:'20200111',
                         time:'14:00:04',
-                        code:000001,
+                        code:'000001',
                         name:'招商银行',
                         price:130,
                         ocount:100,
@@ -139,7 +144,7 @@
                     startDate:'',//开始日期
                     endDate:'',//结束日期
                 },
-                pageTotal: 4,
+                dataTotalCount: 4,
             }
         },
         methods:{ //用户自定义函数
@@ -152,13 +157,6 @@
             cellStyle() {
                 return { padding: '2px' };
             },
-        },
-        created(){ // 监听消息
-            this.$bus.on("codeinput-selected",this.updateSelectedCode);
-
-        },
-        beforeDestroy(){//取消监听消息
-            this.$bus.off("codeinput-selected",this.updateSelectedCode);
         },
         
     }

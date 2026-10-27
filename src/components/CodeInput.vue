@@ -30,12 +30,13 @@
 
 <script>
     export default {
-        name:"CodeInput"
+        name:"CodeInput",
+        emits: ['codeinput-selected'],
         data(){
             return{
                 state:'',
             }
-        }
+        },
         methods:{
             //参数:queryString 输入框的值 callback回调来完成
             querySearchAsync(queryString,callback){
@@ -60,7 +61,7 @@
                 //1 --> 000001 --> 000001
                 this.state = ('000000' + item.code).slice(-6);
                 //
-                this.$bus.emit("codeinput-selected",item)
+                this.$emit("codeinput-selected", item)
             }
         }
     }

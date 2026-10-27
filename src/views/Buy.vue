@@ -1,4 +1,5 @@
 <template>
+    <div>
     <!--信息提示-->
         <div class="crumbs">
             <el-breadcrumb separator="/">
@@ -17,10 +18,11 @@
                 <!--委托组件-->
                 <el-col :span="12">
                     <order-widget :direction="0"/>
-                <!--订单薄组件 -->
                 </el-col>
-                <el-col :span="12">
 
+                <!--订单薄组件 -->
+                <el-col :span="12">
+                    <order-book/>
                 </el-col>
             </el-row>
             <!--资金持仓组件 -->
@@ -28,23 +30,34 @@
         </el-card>
 
 
+    </div>
 </template>
 
 
 <script>
 
+    import { Search } from '@element-plus/icons-vue'
     import PosiList from '../components/PosiList.vue'
     import OrderWidget from '../components/OrderWidget.vue'
+    import OrderBook from '../components/OrderBook.vue'
     export default {
         name: "Buy",
         components:{
+            Search,
             PosiList,
             OrderWidget,
+            OrderBook,
         }
     }
 
 </script>
 
 <style scoped>
+.query-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    vertical-align: middle;
+}
 
 </style>

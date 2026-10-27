@@ -10,12 +10,11 @@
                 </el-breadcrumb-item>
             </el-breadcrumb>
         </div>
-    </div>
-
     <!--资金持仓-->
     <el-card class="container">
         <posi-list/>
     </el-card>
+    </div>
 </template>
 
 

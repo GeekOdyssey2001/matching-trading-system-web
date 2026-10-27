@@ -3,15 +3,15 @@
         <el-form label-width="80px">
             <!--股票信息自动提示框-->
             <el-form-item> <!--父子组件传递变量-->
-                <h3 :style="direction ===0 ?
-                 'color:#F5dC6C':'color:67C23A' ">
+                <h3 class="order-form-title" :style="direction ===0 ?
+                 { color: '#F56C6C' } : { color: '#67C23A' } ">
                  {{direction===0 ? '买入':'卖出'}}股票
                 </h3>
             </el-form-item>
 
             <!--证券代码-->
             <el-form-item label="证券代码">
-                <code-input/>
+                <code-input @codeinput-selected="updateSelectedCode"/>
             </el-form-item>
 
             <!--证券名称-->
@@ -42,9 +42,8 @@
             </el-form-item>
 
             <!--按钮-->
-            <el-form-item>
-                <el-button :type="direction===0 ?'danger': 'success'" 
-                    style="float: right" >
+            <el-form-item class="order-form-actions">
+                <el-button :type="direction===0 ?'danger': 'success'">
                     {{direction===0?'买入':'卖出'}}
                 </el-button>
             </el-form-item>
@@ -72,13 +71,6 @@
         components:{
             CodeInput,
         },
-        created(){ //监听-订阅
-            this.$bus.on("codeinput-selected",this.updateSelectedCode);
-
-        },
-        beforeDestroy(){ //监听-取消订阅
-            this.$bus.off("codeinput-selected",this.updateSelectedCode);
-        },
         methods:{
             updateSelectedCode(item){
                 this.code = item.code;
@@ -89,7 +81,7 @@
         },
         props:{
             direction:{
-                types:Number,required:true
+                type:Number,required:true
             },
         },
     }
@@ -98,6 +90,15 @@
 
 <style lang="scss">
     .orderForm {
+        .order-form-title {
+            width: 100%;
+            text-align: center;
+        }
+
+        .order-form-actions .el-form-item__content {
+            justify-content: flex-end;
+        }
+
         input {
             text-align: center;
         }

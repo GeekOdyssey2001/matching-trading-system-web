@@ -2,32 +2,37 @@
     <!-- <h1>您好~~ 登录</h1> -->
     <!-- 每一个Vue 页面只有一个div跟标签-->
     <div class="login-wrap"> 
-        <el-form class="login-container">
+        <el-form class="login-container"
+        :model="ruleForm" :rules="rules" ref="ruleForm"> <!-- rel 对当前标签的引用  -->
         <!-- -->
         <h3 class="title">用户登录</h3>
-        <!-- -->
-        <el-form-item>
-            <el-input type="text" placeholder="账号"/>
+        <!-- 输入框input -->
+        <el-form-item prop="uid"> <!-- 规则的绑定，是需要绑定到ele-ui -->
+            <el-input v-model="ruleForm.uid" type="text" placeholder="账号"/> <!-- v-model是表单的绑定 -->
         </el-form-item>
-        <el-form-item>
-            <el-input type="password" placeholder="密码"/>
+
+        <el-form-item prop="password">
+            <el-input v-model="ruleForm.password" type="password" placeholder="密码"/>
         </el-form-item>
     
         <el-row>
-            <!--验证码输入框 -->
+            <!--验证码输入框 -->  <!-- 表单的提交：1.回车，事件放到验证码 2.点击按钮，事件放到按钮 -->
             <el-col :span="12">
-                <el-form-item>
-                    <el-input type="text" placeholder="验证码"/>
+                <el-form-item prop="captcha">
+                    <el-input v-model="ruleForm.captcha" type="text" placeholder="验证码"
+                    @keyup.enter.native="submitForm('ruleForm')" />
                 </el-form-item>
             </el-col>
             <!--验证码图片 -->
             <el-col :span="12">
-                <img/>
+                <img :src="codeImg" @click="getCode()"/>
             </el-col>
             <!--登录按钮 -->
             <el-col :span="24">
              <el-form-item>
-                <el-button type="primary" style="width: 100%">
+                <el-button type="primary" style="width: 100%" 
+                :loading="logining"
+                @click="submitForm('ruleForm')" > <!-- load为true，加载中，不能再点击 -->
                 登录
                  </el-button>
               </el-form-item>
@@ -39,7 +44,40 @@
 
 <script>
     export default{
-    name:"Login"
+    name:"Login",
+    data(){
+        return{
+            //1.提交表单
+            ruleForm:{
+                uid:'',
+                password:'',
+                captcha:'', //验证码
+                captchaId:'',//验证码ID
+            },
+            //2.验证码图片
+            codeImg:'',
+            //3.页面限制规则（哪些是需要输入，哪些不需要输入）
+            rules:{
+                uid:[{required:true,message:'请输入账号',trigger:'blur'}], //blur表示焦点离开时校验
+                password:[{required:true,message:'请输入密码',trigger:'blur'}],
+                captcha:[{required:true,message:'请输入验证码',trigger:'blur'}],
+            },
+            //4.防止前端重复提交
+            logining: false,
+        }
+    },
+    methods:{ //自定义函数，处理一些事件
+        //common.js(网络交互) <--logic.js(业务逻辑)<--vue
+        //验证码获取
+        getCode(){
+
+        },
+        //提交表单
+        submitForm(formName){
+
+        }
+
+    }
     }
 
 </script>

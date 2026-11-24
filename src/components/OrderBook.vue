@@ -1,32 +1,32 @@
 <template>
     <!--订单薄窗口-->
-    <el-form label-width="80px">
+    <section class="order-book-panel">
         <!--行情时间-->
-        <el-form-item>
+        <div class="quote-time">
             <h4 style="color:#909399">
                 行情时间:{{hqtime}}
             </h4>
-        </el-form-item>
+        </div>
 
         <!--五档行情-->
-        <el-form-item>
+        <div class="order-book-levels">
             <!--卖-->
             <div class="orderBook">
                 <el-row v-for= "item in sell" :key="item.name">
                     <!-- 档位名称 -->
                     <el-col :span="6">{{item.name}}</el-col>
                     <!-- 价格-->
-                    <el-col :span="6">{{item.price | filterempty }}</el-col>
+                    <el-col :span="6">{{ filterempty(item.price) }}</el-col>
                     <!-- 长度 -->
                     <el-col :span="6">
                         <div class="volumeratio">
-                            <div class="sell" 
+                            <div v-if="item.volume !== -1" class="sell" 
                                 v-bind:style="{width: item.width + '%'}"/>
                         </div>
                     </el-col>
                     <!-- 量 -->
                     <el-col :span="6">
-                        {{item.volume | filterempty }} <!--| 是vue的过滤器 -->
+                        {{ filterempty(item.volume) }}
                     </el-col>
                 </el-row>
             </div>
@@ -36,22 +36,22 @@
                     <!-- 档位名称 -->
                     <el-col :span="6">{{item.name}}</el-col>
                     <!-- 价格-->
-                    <el-col :span="6">{{item.price | filterempty }}</el-col>
+                    <el-col :span="6">{{ filterempty(item.price) }}</el-col>
                     <!-- 长度 -->
                     <el-col :span="6">
                         <div class="volumeratio">
-                            <div class="buy" 
+                            <div v-if="item.volume !== -1" class="buy" 
                                 v-bind:style="{width: item.width + '%'}"/>
                         </div>
                     </el-col>
                     <!-- 量 -->
                     <el-col :span="6">
-                        {{item.volume | filterempty }} <!--| 是vue的过滤器 -->
+                        {{ filterempty(item.volume) }}
                     </el-col>
                 </el-row>
             </div>
-        </el-form-item>
-    </el-form>
+        </div>
+    </section>
     
     
 
@@ -61,10 +61,10 @@
 <script>
     export default{
         name: "OrderBook",
-        filters:{
+        methods:{
             filterempty(value){
                 if(value===-1){
-                    return '-1';
+                    return '-';
                 }else{
                     return value;
                 }
@@ -128,13 +128,13 @@
                             name:"买四",
                             price:4,
                             volume:-1,
-                            width:1,
+                            width:10,
                         },
                         {
                             name:"买五",
                             price:5,
                             volume:-1,
-                            width:1,
+                            width:50,
                         },
                 ],
             }
@@ -144,34 +144,57 @@
 </script>
 
 <style lang="scss" scoped>
-        .orderBook {
-        border: 1px solid #909399;;
-        margin-left: 5%;
-        margin-right: 5%;
+.order-book-panel {
+    padding: 0 5%;
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+}
 
-        .el-row {
+.quote-time {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 32px;
+    margin-bottom: 18px;
+}
 
-            .el-col {
-                height: 35px;
-                line-height: 35px;
-            }
+.order-book-levels {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
 
+.orderBook {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #909399;
+    text-align: center;
+
+    .el-col {
+        height: 35px;
+        line-height: 35px;
+        white-space: nowrap;
+    }
+
+    .volumeratio {
+        display: flex;
+        align-items: center;
+        height: 35px;
+        overflow: hidden;
+
+        .sell,
+        .buy {
+            height: 10px;
         }
 
-        .volumeratio {
-            margin: 10px auto;
-            border: none;
+        .sell {
+            background: #67C23A;
+        }
 
-            .sell {
-                height: 10px;
-                background: #67C23A;
-            }
-
-            .buy {
-                height: 10px;
-                background: #F56C6C;
-            }
-
+        .buy {
+            background: #F56C6C;
         }
     }
+}
 </style>

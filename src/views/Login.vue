@@ -43,6 +43,10 @@
 </template>
 
 <script>
+
+    import {queryCaptcha,login} from '../api/loginApi'
+    import encryptMD5 from 'js-md5'
+
     export default{
     name:"Login",
     data(){
@@ -66,14 +70,68 @@
             logining: false,
         }
     },
+
+    //初次加载调用放在create中，加载完后立刻执行
+    created(){
+        this.getCode();
+    },
+
     methods:{ //自定义函数，处理一些事件
-        //common.js(网络交互) <--logic.js(业务逻辑)<--vue
+        //总体设计原则(分层调用逻辑)：common.js(网络交互) <--logic.js(业务逻辑)<--vue
+
+        //验证码回调函数
+        captchaCallback(code,msg,captchaData){
+            //{id,imageBase64}
+            this.ruleForm.captchaId = captchaData.id;
+            this.codeImg = captchaData.imageBase64;
+        },
+        loginCallback(code,msg,acc){
+            if(code == 2){
+                //登录失败
+                this.$message.error(msg);
+                this.logining = false;
+                this.getCode();
+            }else{
+                //登录成功 =》基础数据保存:uid(用户账号信息),token（登录凭证）
+                sessionStorage.setItem('uid',acc.uid);
+                sessionStorage.setItem('token',acc.token);
+                //显示上次成功登录时间
+                if(acc.lastLoginDate.length > 1){
+                    this.$message.success("登录成功，上次登录时间：" 
+                    + acc.lastLoginDate + "" + acc.lastLoginTime);
+                }else{
+                    this.$message.success("登录成功");
+                }
+                //跳转到主页面
+                setTimeout(() =>{
+                    this.logining = false,
+                    this.$router.push({path:'/dashboard'}); //跳转的地方
+                    },1000); //跳转作1秒延迟
+            }
+        },
+        
         //验证码获取
         getCode(){
-
+            queryCaptcha(this.captchaCallback);
         },
         //提交表单
         submitForm(formName){
+            //对限制条件做判断
+            this.$refs[formName].validate(valid =>{
+                if(valid){
+                    this.logining = true; // 按钮不能重复点击
+                    login({
+                        uid: this.ruleForm.uid,
+                        password:encryptMD%(this.ruleForm.password), // 需要加密处理，后面可能需要更加严格的加密
+                        captcha:this.ruleForm.captcha,
+                        captchaId:this.ruleForm.captchaId,
+                    },this.loginCallback);//第一个参数是提交给后台数据，第二个是回调函数
+
+                }else{
+                    this.$message.error('用户名或密码或验证码不能为空');
+                    this.logining =false;
+                }
+            })
 
         }
 

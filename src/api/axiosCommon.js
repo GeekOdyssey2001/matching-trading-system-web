@@ -12,7 +12,7 @@ export const reqRealEndAsync = (method,baseUrl,url,params,callback) =>{
     params.token = sessionStorage.getItem('token'); //每次请求都带上token
     return axios({
         timeout:5000,
-        baseUrl:baseUrl,
+        baseURL:baseUrl,
         method:method,
         url:url,
         headers:{
@@ -53,7 +53,7 @@ export const reqRealEnd = (method,baseUrl,
     url,params) =>{
         return axios({
             timeout:5000,
-            baseUrl:baseUrl,
+            baseURL:baseUrl,
             method:method,
             url:url,
             headers:{

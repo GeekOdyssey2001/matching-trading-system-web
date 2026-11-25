@@ -24,7 +24,7 @@
                 </el-form-item>
             </el-col>
             <!--验证码图片 -->
-            <el-col :span="12">
+            <el-col :span="12" style="text-align:right">
                 <img :src="codeImg" @click="getCode()"/>
             </el-col>
             <!--登录按钮 -->

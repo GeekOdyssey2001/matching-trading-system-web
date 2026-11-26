@@ -96,9 +96,9 @@
                 sessionStorage.setItem('uid',acc.uid);
                 sessionStorage.setItem('token',acc.token);
                 //显示上次成功登录时间
-                if(acc.lastLoginDate.length > 1){
+                if(acc.lastLoginDate && acc.lastLoginDate.length > 1){
                     this.$message.success("登录成功，上次登录时间：" 
-                    + acc.lastLoginDate + "" + acc.lastLoginTime);
+                    + acc.lastLoginDate + "" + (acc.lastLoginTime || ''));
                 }else{
                     this.$message.success("登录成功");
                 }
@@ -122,7 +122,7 @@
                     this.logining = true; // 按钮不能重复点击
                     login({
                         uid: this.ruleForm.uid,
-                        password:encryptMD%(this.ruleForm.password), // 需要加密处理，后面可能需要更加严格的加密
+                        password:encryptMD5(this.ruleForm.password), // 需要加密处理，后面可能需要更加严格的加密
                         captcha:this.ruleForm.captcha,
                         captchaId:this.ruleForm.captchaId,
                     },this.loginCallback);//第一个参数是提交给后台数据，第二个是回调函数

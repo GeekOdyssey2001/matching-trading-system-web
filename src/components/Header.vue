@@ -45,7 +45,13 @@
         //定义变量
         data(){
             return{
-                username:'guest',
+                collapse: true,
+            }
+        },
+        computed:{
+            username(){
+                let account = sessionStorage.getItem("uid");
+                return account ? account : 'guest';
             }
         },
         methods:{

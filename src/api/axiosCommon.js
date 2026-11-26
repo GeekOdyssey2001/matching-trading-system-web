@@ -24,6 +24,7 @@ export const reqRealEndAsync = (method,baseUrl,url,params,callback) =>{
         traditional:true, //日常使用，默认是false，false含义是ajax会把data的值深度序列化,如果data的值是数组，则需要分割难道值
 
     }).then(res =>{
+        console.log(res); //增加后端相应请求日志
         let result = res.data; 
         //返回的数据，放到res的data中
         //前后端数据做了约定，code，message，data
@@ -43,7 +44,13 @@ export const reqRealEndAsync = (method,baseUrl,url,params,callback) =>{
             if(callback != undefined){
                 callback(result.code,result.message,result.data);
             }
+        }else if(result.code == 2){
+            //成功回调
+            if(callback != undefined){
+                callback(result.code,result.message,result.data);
+            }
         }
+
     });
 
 }; //method：get还是post；baseUrl：url所在；url：实际url，params：参数；callback：回调函数

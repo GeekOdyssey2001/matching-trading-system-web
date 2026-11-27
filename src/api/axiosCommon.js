@@ -58,6 +58,7 @@ export const reqRealEndAsync = (method,baseUrl,url,params,callback) =>{
 //通用公共方法（不包含回调）
 export const reqRealEnd = (method,baseUrl,
     url,params) =>{
+        params.token = sessionStorage.getItem('token'); //每次请求都带上token
         return axios({
             timeout:5000,
             baseURL:baseUrl,

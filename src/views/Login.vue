@@ -74,8 +74,11 @@
     //初次加载调用放在create中，加载完后立刻执行
     created(){
         //判断当前msg是否存在，如果存在，则弹出这个msg
-        if(Boolean(this.$route.query.msg) && (this.$route.query.msg != undefined)){
-            this.$message.info(this.$route.msg + "");
+        if(this.$route.query.msg){
+            this.$message.info(String(this.$route.query.msg));
+            const query = { ...this.$route.query };
+            delete query.msg;
+            this.$router.replace({ query, hash: this.$route.hash });
         }
         this.getCode();
     },

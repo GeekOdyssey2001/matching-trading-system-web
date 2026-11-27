@@ -46,7 +46,8 @@
 
     import {queryCaptcha,login} from '../api/loginApi'
     import encryptMD5 from 'js-md5'
-
+    import {queryBalance,queryOrder,queryPosi,queryTrade} from '../api/orderApi'
+ 
     export default{
     name:"Login",
     data(){
@@ -113,6 +114,11 @@
                 setTimeout(() =>{
                     this.logining = false,
                     this.$router.push({path:'/dashboard'}); //跳转的地方
+                    //成交、委托、持仓查询，减少前后端交互
+                    queryBalance();
+                    queryOrder();
+                    queryTrade();
+                    queryPosi();
                     },1000); //跳转作1秒延迟
             }
         },

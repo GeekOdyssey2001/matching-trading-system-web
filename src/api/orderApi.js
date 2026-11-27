@@ -6,7 +6,7 @@ import store from "@/store";
 export const queryBalance = () =>{
     reqRealEndAsync("post",
         config.real_domain,
-        'api/balance',
+        '/api/balance',
         {uid:sessionStorage.getItem('uid')},
         (code,msg,data) =>{
             store.commit("updateBalance",data)
@@ -17,7 +17,7 @@ export const queryBalance = () =>{
 export const queryPosi = () =>{
     reqRealEndAsync("post",
         config.real_domain,
-        'api/posiInfo',
+        '/api/posiInfo',
         {uid:sessionStorage.getItem('uid')},
         (code,msg,data) =>{
             store.commit("updatePosi",data)
@@ -28,7 +28,7 @@ export const queryPosi = () =>{
 export const queryOrder = () =>{
     reqRealEndAsync("post",
         config.real_domain,
-        'api/orderInfo',
+        '/api/orderInfo',
         {uid:sessionStorage.getItem('uid')},
         (code,msg,data) =>{
             store.commit("updateOrder",data)
@@ -39,7 +39,7 @@ export const queryOrder = () =>{
 export const queryTrade = () =>{
     reqRealEndAsync("post",
         config.real_domain,
-        'api/tradeInfo',
+        '/api/tradeInfo',
         {uid:sessionStorage.getItem('uid')},
         (code,msg,data) =>{
             store.commit("updateTrade",data)

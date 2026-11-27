@@ -39,4 +39,11 @@ export const logout = () => {
 };
 
 
+export const pwdUpdate = (params,callback) => {
+        return reqRealEndAsync("post",config.real_domain,
+        '/login/pwdUpdate',params,callback);
+        
+}
+
+
 

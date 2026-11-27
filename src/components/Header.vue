@@ -12,7 +12,8 @@
     <!--右侧下拉列表：用户信息+下拉菜单-->
     <div class = "header-right">
         <div class = "header-user-con">
-            <el-dropdown class="user-name" trigger="click">
+            <el-dropdown class="user-name" trigger="click" 
+                @command="handleLogout">
                 <span class = "el-dropdown-link">
                     {{username}}
                     <!--小箭头-->
@@ -22,7 +23,7 @@
                 <!--下拉菜单内容-->
                 <template #dropdown>
                     <el-dropdown-menu>
-                        <el-dropdown-item command="">退出登录</el-dropdown-item>
+                        <el-dropdown-item command="loginout">退出登录</el-dropdown-item>
                     </el-dropdown-menu>
                 </template>
             </el-dropdown>
@@ -34,6 +35,7 @@
 
 <script>
     import { Fold, Expand, CaretBottom } from '@element-plus/icons-vue'
+    import {logout} from '../api/loginApi'
 
     export default{
         name: "Header",
@@ -55,6 +57,13 @@
             }
         },
         methods:{
+            //下拉菜单事件响应
+            handleLogout(command){
+                if(command == 'loginout'){
+                    logout();
+                }
+
+            },
             collapseChange(){
                 this.$emit('toggle-collapse');
             }

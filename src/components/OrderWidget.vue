@@ -28,6 +28,7 @@
             <el-form-item label="价格"> <!--只能输入数字-->
                 <el-input-number v-model="price"
                 controls-position="right"
+                @change="handlePrice"
                 :step="0.01"
                 :min="0.01"/>
             </el-form-item>
@@ -43,7 +44,8 @@
 
             <!--按钮-->
             <el-form-item class="order-form-actions">
-                <el-button :type="direction===0 ?'danger': 'success'">
+                <el-button :type="direction===0 ?'danger': 'success'" 
+                @click="onOrder">
                     {{direction===0?'买入':'卖出'}}
                 </el-button>
             </el-form-item>
@@ -56,6 +58,11 @@
 
 <script>
     import CodeInput from './CodeInput'
+    import {sendOrder} from '../api/orderApi'
+    import {constants} from '../api/constants'
+    import * as moment from 'moment'
+
+
     export default {
         name: "OrderWidget",
         data(){
@@ -72,12 +79,49 @@
             CodeInput,
         },
         methods:{
+            handleOrderRes(code,msg,data){
+                if(code == 0){
+                    this.$message.success("委托送往交易所");
+                }else{
+                    this.$message.error("委托失败" + msg);
+                }
+
+            },
+            //价格变动，处理可买的股票数量
+            handlePrice(){
+                if(this.direction === constants.SELL){
+                    let posiArr = this.$store.state.posiData;
+                    for(let i=0,len=posiArr.length; i<len;i++){
+                        if(posiArr[i].code == this.code){
+                            this.affordCount = posiArr[i].count;
+                        }
+                    }
+                }else{
+                    // 总资金/委托价格，向下取整
+                    this.affordCount = parseInt(
+                        (this.$store.state.balance/constants.MULTI_FACTOR)
+                        / this.price
+                    )
+                }
+            }
             updateSelectedCode(item){
                 this.code = item.code;
                 this.name = item.name;
                 this.price = undefined;
                 this.volume = undefined;
-            }
+            },
+            onOrder(){
+                sendOrder({
+                    uid: sessionStorage.getItem("uid"),
+                    type: constants.NEW_ORDER,
+                    timestamp: moment.now(),
+                    code: this.code,
+                    direction: this.direction,
+                    price: this.price * constants.MULTI_FACTOR,
+                    volume: this.volume,
+                    orderType: constants.LIMIT
+                },this.handleOrderRes) //handleOrderRes回调函数
+            },
         },
         props:{
             direction:{

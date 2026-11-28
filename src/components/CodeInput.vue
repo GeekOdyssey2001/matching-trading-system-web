@@ -29,6 +29,10 @@
 
 
 <script>
+
+import {queryCodeName} from '../api/orderApi'
+
+
     export default {
         name:"CodeInput",
         emits: ['codeinput-selected'],
@@ -40,21 +44,30 @@
         methods:{
             //参数:queryString 输入框的值 callback回调来完成
             querySearchAsync(queryString,callback){
-                let list=[
-                    {
-                        code:1,
-                        name:'平安银行',
-                        value:'000001-平安银行'
-                    },
-                    {
-                        code:600000,
-                        name:'浦发银行',
-                        value:'600000-浦发银行'
-                    },
-                ];
-                //通知自动提示框显示哪几项
-                callback(list);
+                let list=[];
+                queryCodeName({
+                    key:queryString
+                }).then(res =>{
+                    if(res.data.code !=0 ){
+                        this.$route.replace({
+                            path: "login",
+                            query: {
+                                msg: result.message
+                            }
+                        });
+                    }else{
+                        let resData = res.data.data;
+                        for(let i of resData){
+                            i.value = ('000000' + i.code).slice(-6)
+                             + '--' + i.name;
+                        }
+                        list = resData;
+                         //通知自动提示框显示哪几项
+                        callback(list);
+                    }
+                });
             },
+            
             updateInput(item){
                 //code[int]
                 //this.code = item.code; 1

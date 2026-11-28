@@ -3,6 +3,15 @@ export const constants = {
     //乘数
     MULTI_FACTOR: 10000,
 
+    //委托类型
+    NEW_ORDER: 0,
+    CANCEL_ORDER: 1,
+
+    //
+    LIMIT: 0,
+    MAARKET: 1,
+
+
     //买卖方向
     BUY:1,
     SELL:1,

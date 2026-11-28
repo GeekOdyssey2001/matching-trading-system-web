@@ -1,4 +1,4 @@
-import { reqRealEndAsync } from "./axiosCommon";
+import { reqRealEndAsync,reqRealEnd } from "./axiosCommon";
 import {config} from './frontConfig'
 import store from "@/store";
 
@@ -44,4 +44,20 @@ export const queryTrade = () =>{
         (code,msg,data) =>{
             store.commit("updateTrade",data)
         })
+}
+
+
+//查股票代码
+export const queryCodeName = (params) =>{
+    return reqRealEnd("post",
+        config.real_domain,
+        '/api/code',
+        params);
+}
+
+
+export const sendOrder = (params,callback) => {
+        return reqRealEndAsync(
+            "post",config.real_domain,
+            '/api/sendOrder',params,callback);
 }
